@@ -5,6 +5,7 @@ import (
     "log"
     "strconv"
     "bufio"
+    "io"
 )
 
 // 소켓 서버를 연다
@@ -37,12 +38,23 @@ func handler(conn net.Conn){
     var (
         buf = make([]byte, 1024)
         r = bufio.NewReader(conn)
-        w = bufio.NewWriter(conn)
     )
 
+LOOP:
     for {
         n, err := r.read(buf)
         data := string(buf[:n])
+
+        switch err {
+            case io.EOF:
+                break LOOP
+            
+            case nil:
+                log.Println("Received:", data)
+            default:
+                log.Fatalf("Fail to receive data\n%s", err)
+                return
+        }
     }
 }
 
