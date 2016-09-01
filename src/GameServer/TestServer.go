@@ -2,8 +2,9 @@ package main
 
 import (
     "net"
-    "fmt"
+    "log"
     "strconv"
+    "bufio"
 )
 
 // 소켓 서버를 연다
@@ -12,11 +13,11 @@ func OpenSocketServer(port int) {
     defer listen.Close()
 
     if err != nil {
-        fmt.Println("Fail to open socket in port", port, "\n", err)
+        log.Fatalf("Fail to open socket in port %d\n%s", port, err)
         return
     }
 
-    fmt.Println("Success to open socket in port", port)
+    log.Printf("Success to open socket in port %d", port)
 
     for {
         conn, err := listen.Accept()
@@ -32,6 +33,17 @@ func OpenSocketServer(port int) {
 
 func handler(conn net.Conn){
     defer conn.Close()
+
+    var (
+        buf = make([]byte, 1024)
+        r = bufio.NewReader(conn)
+        w = bufio.NewWriter(conn)
+    )
+
+    for {
+        n, err := r.read(buf)
+        data := string(buf[:n])
+    }
 }
 
 func main(){
