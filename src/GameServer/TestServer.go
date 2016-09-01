@@ -7,17 +7,16 @@ import (
 )
 
 // 소켓 서버를 연다
-func OpenSocketServer(port int)
-{
+func OpenSocketServer(port int) {
     listen, err := net.Listen("tcp4", ":"+strconv.Itoa(port))
     defer listen.Close()
 
     if err != nil {
-        println("Fail to open socket in port %d\n%s", port, err)
+        fmt.Println("Fail to open socket in port", port, "\n", err)
         return
     }
 
-    println("Success to open socket in port %d", port)
+    fmt.Println("Success to open socket in port", port)
 
     for {
         conn, err := listen.Accept()
@@ -35,6 +34,6 @@ func handler(conn net.Conn){
     defer conn.Close()
 }
 
-func main{
+func main(){
     OpenSocketServer(8888)
 }
