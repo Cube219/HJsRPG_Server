@@ -1,4 +1,4 @@
-package TestServer
+package main
 
 import (
 	"bufio"
@@ -6,6 +6,9 @@ import (
 	"log"
 	"net"
 	"strconv"
+
+	"github.com/golang/protobuf/proto"
+	protocol "Protocol"
 )
 
 // OpenSocketServer : 소켓 서버를 연다
@@ -43,7 +46,7 @@ func handler(conn net.Conn) {
 LOOP:
 	for {
 		n, err := r.Read(buf)
-		data := string(buf[:n])
+		data := buf[:n]
 
 		switch err {
 		case io.EOF:
@@ -60,6 +63,18 @@ LOOP:
 }
 
 // ProcessMessage : 메시지 처리
-func ProcessMessage(data string) {
-	log.Println("Received:", data)
+func ProcessMessage(data []byte) {
+	log.Println("Received:", string(data))
+
+	p := &protocol.Test{}
+
+	if err := proto.Unmarshal(data, p); err != nil{
+		log.Fatalf("Fail to decode.\n%s", err)
+	} else {
+		log.Printf("TestInt: %d\nTestString: %s", p.TestInt, p.TestString)
+	}
+}
+
+func main(){
+	OpenSocketServer(8888)
 }

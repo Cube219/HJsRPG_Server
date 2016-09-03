@@ -1,8 +1,8 @@
 package main
 
 import (
-	tc "TestClient"
-//	ts "TestServer"
+	tc "GameServer/TestClient"
+//	ts "GameServer/TestServer"
 )
 
 func main() {
