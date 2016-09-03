@@ -1,4 +1,4 @@
-package main
+package TestServer
 
 import (
 	"bufio"
@@ -62,8 +62,4 @@ LOOP:
 // ProcessMessage : 메시지 처리
 func ProcessMessage(data string) {
 	log.Println("Received:", data)
-}
-
-func maiin() {
-	OpenSocketServer(8888)
 }

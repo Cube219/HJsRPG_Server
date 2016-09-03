@@ -1,4 +1,4 @@
-package main
+package TestClient
 
 import (
 	"log"
@@ -18,8 +18,4 @@ func ConnectToServer(ip string, port int) {
 	}
 
 	conn.Write([]byte("Ping"))
-}
-
-func main() {
-	ConnectToServer("127.0.0.1", 8888)
 }
