@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/golang/protobuf/proto"
-	protocol "Protocol"
+	protocol "Protocol/TestProtocol"
 )
 
 func ConnectToServer(ip string, port int) {

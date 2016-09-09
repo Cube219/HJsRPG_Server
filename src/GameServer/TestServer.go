@@ -8,7 +8,7 @@ import (
 	"strconv"
 
 	"github.com/golang/protobuf/proto"
-	protocol "Protocol"
+	protocol "Protocol/TestProtocol"
 )
 
 // OpenSocketServer : 소켓 서버를 연다
