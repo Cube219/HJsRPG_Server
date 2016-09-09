@@ -18,8 +18,9 @@ func (g *GameService) Start() {
     
     // Log를 남길 파일 생성
     now := time.Now().Format("2006-01-02 15h 04m 05s")
-    fmt.Println(now)
-    o, err := os.Create("Log(" + now + ").log")
+    
+    os.Mkdir("Log", 0777)
+    o, err := os.Create("Log/Log(" + now + ").log")
     if err != nil {
         panic(err)
     }
@@ -32,6 +33,7 @@ func (g *GameService) Start() {
 func (g *GameService) WriteLog(log string) {
     now := time.Now().Format("2006-01-02 15h 04m 05s")
 
+    fmt.Println(now + ": " + log)
     _, err := g.logOutput.WriteString(now + ": " + log + "\n");
     if err != nil {
         panic(err)
