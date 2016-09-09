@@ -22,6 +22,7 @@ func OpenSocketServer(port int) {
 	}
 
 	log.Printf("Success to open socket in port %d", port)
+	log.
 
 	for {
 		conn, err := listen.Accept()

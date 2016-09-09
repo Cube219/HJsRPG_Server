@@ -1,44 +1,43 @@
 package GameServer
 
 import (
-  //  "os"
- //   "time"
-//    "fmt"
+    "os"
+    "time"
+    "fmt"
 )
 
 // --------------------------
-// GameService: 게임 세계의 연산을 담당하는 게임 서비스이다.
+// GameService : 게임 세계의 연산을 담당하는 게임 서비스이다.
 type GameService struct {
     ID int64
- //   logOutput *File
+    logOutput *os.File
 }
 
-// GameService 관련 함수
-// Start: 게임 서비스를 실행한다.
+// Start : 게임 서비스를 실행한다.
 func (g *GameService) Start() {
-    /*
+    
     // Log를 남길 파일 생성
-    now := time.Now()
-    fo, err := os.Create("Log/Log(" + now.String() + ").log")
+    now := time.Now().Format("2006-01-02 15h 04m 05s")
+    fmt.Println(now)
+    o, err := os.Create("Log(" + now + ").log")
     if err != nil {
         panic(err)
     }
-    g.logOutput = fo*/
+    g.logOutput = o
+
+   g.WriteLog(fmt.Sprintf("GameService(%d) Start.", g.ID))
 }
-/*
-// Log: 로그파일에 로그를 남긴다.
-func (g *GameService) Log(format string, a ...interface{}) {
-    now := time.Now()
 
-    _, err := g.logOutput.WriteString(now.String() + ": " + fmt.Sprintf(format, a));
+// WriteLog : 로그파일에 로그를 남긴다.
+func (g *GameService) WriteLog(log string) {
+    now := time.Now().Format("2006-01-02 15h 04m 05s")
+
+    _, err := g.logOutput.WriteString(now + ": " + log + "\n");
     if err != nil {
         panic(err)
     }
-}*/
-
+}
 // ---------------------------
-
-
 
 // CreateGameService: 게임 서비스를 생성한다.
 func CreateGameService() *GameService {
