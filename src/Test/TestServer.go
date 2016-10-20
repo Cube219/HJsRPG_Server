@@ -7,8 +7,8 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/golang/protobuf/proto"
-	protocol "Protocol/TestProtocol"
+	"protocol/users"
+//	flatbuffers "github.com/google/flatbuffers/go"
 )
 
 // OpenSocketServer : 소켓 서버를 연다
@@ -22,7 +22,6 @@ func OpenSocketServer(port int) {
 	}
 
 	log.Printf("Success to open socket in port %d", port)
-	log.
 
 	for {
 		conn, err := listen.Accept()
@@ -67,13 +66,18 @@ LOOP:
 func ProcessMessage(data []byte) {
 	log.Println("Received:", string(data))
 
+/*
 	p := &protocol.Test{}
 
 	if err := proto.Unmarshal(data, p); err != nil{
 		log.Fatalf("Fail to decode.\n%s", err)
 	} else {
 		log.Printf("TestInt: %d\nTestString: %s", p.TestInt, p.TestString)
-	}
+	}*/
+	user := users.GetRootAsUser(data, 0) 
+
+	log.Println(string(user.Name())) 
+	log.Println(user.Id()) 
 }
 
 func main(){
