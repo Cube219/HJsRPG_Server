@@ -1,0 +1,20 @@
+include "../BaseProtocol.fbs";
+namespace GameServer.TestProtocol;
+
+enum MessageType:uint{
+    TestPing = 0,
+    TestPong
+}
+
+// TestPing : 테스트로 Ping을 보낸다.
+table TestPing {
+    intValue:int;
+
+}
+
+// TestPong : 테스트로 Pong을 보낸다.
+table TestPong {
+    intValue:int;
+}
+
+root_type TestPing;
