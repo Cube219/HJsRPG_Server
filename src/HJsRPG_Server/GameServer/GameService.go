@@ -16,7 +16,7 @@ type GameService struct {
 
     port int
 
-    connectionList []*ConnectedClient
+    clientList []*ConnectedClient
     connectClientCh chan net.Conn
 }
 
@@ -81,8 +81,10 @@ func (g *GameService) Loop() {
         select {
             case conn := <-g.connectClientCh: // 클라이언트 연결 됨
                 g.WriteLog("Client connected.")
-                connInfo := NewConnectedClient(conn) 
-                g.connectionList = append(g.connectionList, connInfo);
+
+                // clientList에 넣어줌
+                cli := NewConnectedClient(conn) 
+                g.clientList = append(g.clientList, cli);
         }
     }
 }
