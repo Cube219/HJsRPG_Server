@@ -16,6 +16,7 @@ type GameService struct {
 
     port int
 
+    connectionList []*ConnectedClient
     connectClientCh chan net.Conn
 }
 
@@ -33,7 +34,7 @@ func (g *GameService) Start() {
     g.logOutput = o
 
     // 클라이언트 Listen 열기
-    go g.ListenClient()
+    go g.ListenClientLoop()
     // 메인 루프 실행
     go g.Loop()
 
@@ -51,8 +52,8 @@ func (g *GameService) WriteLog(log string) {
     }
 }
 
-// ListenClient : 클라이언트 접속을 기다린다.
-func (g *GameService) ListenClient() {
+// ListenClientLoop : 클라이언트 접속을 기다리는 루프문
+func (g *GameService) ListenClientLoop() {
     // 설정한 Port로 Listen 한다.
     listen, err := net.Listen("tcp4", ":" + strconv.Itoa(g.port))
     defer listen.Close()
@@ -74,39 +75,19 @@ func (g *GameService) ListenClient() {
 }
 
 // Loop : GameService의 메인 루프문
-func (g *GameService) Loop() {/*
-LOOP:
+func (g *GameService) Loop() {
+//LOOP:
    for {
         select {
             case conn := <-g.connectClientCh: // 클라이언트 연결 됨
                 g.WriteLog("Client connected.")
-                conn.
+                connInfo := NewConnectedClient(conn) 
+                g.connectionList = append(g.connectionList, connInfo);
         }
-    }*/
+    }
 }
 
 // ---------------------------------------------------------
-
-// ConnectionInfo : 연결된 클라이언트의 정보이다
-type ConnectionInfo struct {
-    readCh chan uint
-    sendCh chan uint
-    
-    conn net.Conn
-}
-
-// ReadLoop : 들어오는 정보를 받아내는 루프문
-func (c *ConnectionInfo) ReadLoop() {
-
-}
-
-// SendLoop : 클라이언트로 정보를 보내는 루프문
-func (c *ConnectionInfo) SendLoop() {
-
-}
-
-// ---------------------------------------------------------
-
 
 // CreateGameService : 게임 서비스를 생성한다.
 func CreateGameService(port int) *GameService {
@@ -116,18 +97,4 @@ func CreateGameService(port int) *GameService {
     }
 
     return &g
-}
-
-// NewConnectionInfo : 클라이언트 연결에 관한 새로운 정보 생성
-func NewConnectionInfo(conn net.Conn) *ConnectionInfo {
-    c := ConnectionInfo {
-        conn: conn,
-        readCh: make(chan uint, 1),
-        sendCh: make(chan uint, 1),
-    }
-
-    go c.ReadLoop();
-    go c.SendLoop();
-
-    return &c;
 }
