@@ -1,7 +1,7 @@
 include "../BaseProtocol.fbs";
 namespace GameServer.TestProtocol;
 
-enum MessageType:uint{
+enum ProtocolType:uint{
     TestPing = 0,
     TestPong
 }
