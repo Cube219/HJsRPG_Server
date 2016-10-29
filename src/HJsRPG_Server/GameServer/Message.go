@@ -25,3 +25,18 @@ func (m *Message) ToByte() []byte {
 
     return d
 }
+
+// Parse : 바이트 배열을 메시지로 바꿔준다.
+func Parse(d []byte) Message {
+    var m Message
+
+    protocolTypeByte := d[0:4]
+    messageTypeByte := d[4:8]
+    data := d[8:]
+
+    m.protocolType = uint(binary.LittleEndian.Uint32(protocolTypeByte))
+    m.messageType = uint(binary.LittleEndian.Uint32(messageTypeByte))
+    m.data = data
+
+    return m
+}
