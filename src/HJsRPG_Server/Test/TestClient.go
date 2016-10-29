@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"protocol/users"
 	flatbuffers "github.com/google/flatbuffers/go"
+	testProtocol "HJsRPG_Server/Protocol/GameServer/TestProtocol"
 )
 
 func ConnectToServer(ip string, port int) {
@@ -20,29 +20,14 @@ func ConnectToServer(ip string, port int) {
 		log.Fatalln(err)
 	}
 
-	// --- 데이터 보냄
-
-/*
-	p := &protocol.Test{}
-	p.TestString = "test_string"
-	p.TestInt = 132
-
-	out, err := proto.Marshal(p)
-	if err != nil{
-		log.Fatalf("Fail to encode.\n %s", err)
-	}*/
-
 	b := flatbuffers.NewBuilder(0)
 	b.Reset();
 
-	name_position := b.CreateByteString([]byte("NName"))
+	testProtocol.TestPingStart(b)
+	testProtocol.TestPingAddIntValue(b, 15)
+	pingPos := testProtocol.TestPingEnd(b)
 
-	users.UserStart(b)
-	users.UserAddName(b, name_position) 
-	users.UserAddId(b, 132)
-	user_pos := users.UserEnd(b)
-
-	b.Finish(user_pos) 
+	b.Finish(pingPos) 
 	
 	raw := b.Bytes[b.Head():]
 

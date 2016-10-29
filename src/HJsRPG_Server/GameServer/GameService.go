@@ -36,7 +36,7 @@ func (g *GameService) Start() {
     // 클라이언트 Listen 열기
     go g.ListenClientLoop()
     // 메인 루프 실행
-    go g.Loop()
+    g.Loop()
 
     g.WriteLog("GameService Start.")
 }

@@ -1,10 +1,10 @@
 package main
 
 import (
-    gs "GameServer"
+    gs "HJsRPG_Server/GameServer"
 )
 
 func main(){
-    gameService := gs.CreateGameService()
+    gameService := gs.CreateGameService(8888)
     gameService.Start()
 }
