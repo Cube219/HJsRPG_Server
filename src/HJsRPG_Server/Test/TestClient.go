@@ -8,6 +8,7 @@ import (
 
 	flatbuffers "github.com/google/flatbuffers/go"
 	testProtocol "HJsRPG_Server/Protocol/GameServer/TestProtocol"
+	gs "HJsRPG_Server/GameServer"
 )
 
 func ConnectToServer(ip string, port int) {
@@ -30,8 +31,14 @@ func ConnectToServer(ip string, port int) {
 	b.Finish(pingPos) 
 	
 	raw := b.Bytes[b.Head():]
+	
+	m := gs.Message{
+		ProtocolType: 0,
+		MessageType: 0,
+		Data: raw,
+	}
 
-	conn.Write(raw)
+	conn.Write(m.ToByte())
 }
 
 func main(){
