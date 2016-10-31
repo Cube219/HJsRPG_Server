@@ -7,7 +7,7 @@ import (
 	"net"
 	"strconv"
 
-	"protocol/users"
+	//"protocol/users"
 //	flatbuffers "github.com/google/flatbuffers/go"
 )
 
