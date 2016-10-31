@@ -1,4 +1,4 @@
-package GameServer
+package Network
 
 import "encoding/binary"
 

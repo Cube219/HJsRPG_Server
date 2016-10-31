@@ -6,6 +6,7 @@ import (
     "fmt"
     "net"
     "strconv"
+    network "HJsRPG_Server/Network"
 )
 
 // ---------------------------------------------------------
@@ -16,7 +17,7 @@ type GameService struct {
 
     port int
 
-    clientList []*ConnectedClient
+    clientList []*network.ConnectedClient
     connectClientCh chan net.Conn
 }
 
@@ -83,7 +84,7 @@ func (g *GameService) Loop() {
                 g.WriteLog("Client connected.")
 
                 // clientList에 넣어줌
-                cli := NewConnectedClient(conn) 
+                cli := network.NewConnectedClient(conn) 
                 g.clientList = append(g.clientList, cli);
         }
     }
