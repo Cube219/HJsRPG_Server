@@ -1,6 +1,6 @@
 # GameServer
 
-게임 서버의 핵심 부분을 담당한다.  
+게임 서버의 핵심 부분을 담당합니다.  
 (Take a core in game server.)
 
 ## GameService.go
