@@ -22,7 +22,7 @@
     * **LoginService.go**
       * 맨 처음에 접속할 때 로그인하는 서버이다.
       * 아이디 / 비밀번호 정보를 확인하고, 세션을 생성해준다.
-      * 그리고 만든 세션을 GameServer에 전송한다.
+      * 그리고 만든 세션을 GameService에 전송한다.
     * **AccountDB.go**
       * 계정과 관련된 DB하고 통신한다.
   * **ManagementServer**
@@ -52,7 +52,49 @@
   * **Protocol**
     * 서버간 / 서버와 클라이언트간 통신하는 프로토콜을 정의한다.
     * Flatbuffers에 의해 내용이 자동으로 생성됨.
-
+    * (작성중...)
+    * **Client-LoginServer**
+      * 클라이언트-로그인서버 관련 프로토콜.
+      * **AssignProtocol.fbs**
+        * 회원가입과 관련된 프로토콜
+      * **LoginProtocol.fbs**
+        * 로그인과 관련된 프로토콜
+        * 아이디-비밀번호, 세션...
+    * **Client-GameServer**
+      * 클라이언트-게임서버 관련 프로토콜.
+      * **InGame**
+        * **InGameBaseProtocol.fbs**
+          * InGame에 있는 프로토콜의 기본 프로토콜.
+          * 각종 struct나 enum들의 정의들로 구현되어 있음.
+        * **PlayerActionProtocol.fbs**
+          * 플레이어 홛동과 관련된 프로토콜.
+          * 플레이어 이동 / 스킬사용 / 아이템 습득 등등...
+        * **PlayerInfoProtocol.fbs**
+          * 플레이어 정보과 관련된 프로토콜.
+          * 아이템 / 스킬 / 스텟...
+        * **MapActionProtocol.fbs**
+          * 맵에 있는 것들의 활동과 관련된 프로토콜.
+          * 몬스터 움직임 / 다른 캐릭터 이동...
+        * **MapInfoProtocol.fbs**
+          * 맵에 있는 정보과 관련된 프로토콜.
+          * 몬스터 / 다른 캐릭터...
+      * **Chat** (차후 구현)
+        * **MapChatProtocol.fbs**
+          * 일반 Map에서 채팅할 때 쓰는 프로토콜.
+        * **WorldChatProtocol.fbs**
+          * World 내에서 채팅할 때 쓰는 프로토콜.
+          * 해당 World에 속해있는 모두에게 보여짐.
+        * **WideChatProtocol.fbs**
+          * 모두에게 채팅할 때 쓰는 프로토콜.
+    * **LoginServer-GameServer**
+      * 로그인서버-게임서버 관련 프로토콜.
+      * **SessionInfo.fbs**
+        * 세션 관련 정보를 보낼 때 쓰는 프로토콜.
+        * 보통 로그인하고 나서 보냄.
+    * **ManagementServer-LoginServer**
+      * 관리서버-로그인서버 관련 프로토콜. (차후 구현)
+    * **ManagementServer-GameServer**
+      * 관리서버-게임서버 관련 프로토콜. (차후 구현)
 
 차후 구조간의 상관관계 추가예정...  
 (Add relationship between each structures in future...)
