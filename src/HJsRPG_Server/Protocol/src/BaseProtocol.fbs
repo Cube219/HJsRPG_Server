@@ -1,0 +1,16 @@
+enum ProtocolType:uint {
+    _ClientGameServer_Chat_MapChatProtocol = 0,
+    _ClientGameServer_Chat_WideChatProtocol,
+    _ClientGameServer_Chat_WorldChatProtocol,
+
+    _ClientGameServer_InGame_InGameBaseProtocol,
+    _ClientGameServer_InGame_MapActionProtocol,
+    _ClientGameServer_InGame_MapInfoProtocol,
+    _ClientGameServer_InGame_PlayerActionProtocol,
+    _ClientGameServer_InGame_PlayerInfoProtocol,
+
+    _ClientLoginServer_AssignProtocol,
+    _ClientLoginServer_LoginProtocol,
+    
+    _LoginServerGameServer_SessionInfoProtocol,
+}

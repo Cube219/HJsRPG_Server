@@ -1,0 +1,4 @@
+namespace Client-GameServer.Chat;
+
+enum MessageType:uint{
+}

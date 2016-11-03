@@ -1,0 +1,4 @@
+namespace LoginServer-GameServer;
+
+enum MessageType:uint{
+}

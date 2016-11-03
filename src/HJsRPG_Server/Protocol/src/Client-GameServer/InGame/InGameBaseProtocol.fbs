@@ -1,0 +1,4 @@
+namespace Client-GameServer.InGame;
+
+enum MessageType:uint{
+}

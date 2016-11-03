@@ -1,0 +1,4 @@
+namespace Client-LoginServer;
+
+enum MessageType:uint{
+}

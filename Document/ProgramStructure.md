@@ -52,7 +52,9 @@
   * **Protocol**
     * 서버간 / 서버와 클라이언트간 통신하는 프로토콜을 정의한다.
     * Flatbuffers에 의해 내용이 자동으로 생성됨.
-    * (작성중...)
+    * **BaseProtocol.fbs**
+      * 프로토콜의 베이스 기반
+      * 각 프로토콜들의 enum지정등의 역할을 함.
     * **Client-LoginServer**
       * 클라이언트-로그인서버 관련 프로토콜.
       * **AssignProtocol.fbs**
@@ -88,7 +90,7 @@
           * 모두에게 채팅할 때 쓰는 프로토콜.
     * **LoginServer-GameServer**
       * 로그인서버-게임서버 관련 프로토콜.
-      * **SessionInfo.fbs**
+      * **SessionInfoProtocol.fbs**
         * 세션 관련 정보를 보낼 때 쓰는 프로토콜.
         * 보통 로그인하고 나서 보냄.
     * **ManagementServer-LoginServer**
